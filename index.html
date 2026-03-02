@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Para o Gabriel 🌹</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;700&display=swap');
+
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #4a0404); /* Fundo elegante e escuro */
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            position: relative;
+        }
+
+        /* Nome Gabriel se movendo */
+        .nome-gabriel {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: #ff4d4d;
+            text-shadow: 0 0 20px rgba(255, 77, 77, 0.8);
+            animation: flutuarNome 3s infinite ease-in-out;
+            margin-bottom: 10px;
+        }
+
+        @keyframes flutuarNome {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
+        }
+
+        /* Painel do Convite */
+        .convite {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            z-index: 20;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #eee;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #btnSim {
+            background: #e63946;
+            color: white;
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.5);
+        }
+
+        #btnSim:hover {
+            transform: scale(1.1);
+            background: #ff4d4d;
+        }
+
+        #btnNao {
+            background: #666;
+            color: white;
+            position: relative;
+        }
+
+        /* Rosas Decorativas do Fundo */
+        .rosa-decor {
+            position: absolute;
+            font-size: 80px;
+            z-index: 5;
+            animation: girarRosa 8s infinite linear;
+            opacity: 0.5;
+        }
+
+        @keyframes girarRosa {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Estilo da Explosão (Corações e Rosas que Pulam) */
+        .explosao-item {
+            position: fixed;
+            font-size: 40px;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 1;
+            transform: scale(1);
+            animation: pularEDesaparecer 2.5s ease-out forwards;
+        }
+
+        @keyframes pularEDesaparecer {
+            0% {
+                transform: translate(0, 0) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(1.5) rotate(var(--r));
+                opacity: 0;
+            }
+        }
+
+        .marca-dagua {
+            position: fixed;
+            bottom: 15px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="convite">
+        <div class="nome-gabriel">Gabriel 🌹</div>
+        <h2>vamos sair nessa sexta meu amor 🍷</h2>
+        <div class="botoes">
+            <button id="btnSim" onclick="confirmar()">COM CERTEZA!</button>
+            <button id="btnNao" onmouseover="fugir()" onclick="fugir()">NÃO</button>
+        </div>
+    </div>
+
+    <div class="marca-dagua">Criado por Giovana Top Programation ✨</div>
+
+    <script>
+        // Gerar rosas flutuantes pelo fundo (estilo Roza)
+        const emojisFundo = ['🌹', '🍷', '✨'];
+        for (let i = 0; i < 18; i++) {
+            const rosa = document.createElement('div');
+            rosa.className = 'rosa-decor';
+            rosa.innerText = emojisFundo[Math.floor(Math.random() * emojisFundo.length)];
+            rosa.style.left = Math.random() * 100 + 'vw';
+            rosa.style.top = Math.random() * 100 + 'vh';
+            rosa.style.fontSize = (Math.random() * 50 + 40) + 'px';
+            rosa.style.animationDuration = (Math.random() * 6 + 4) + 's';
+            rosa.style.animationDelay = (Math.random() * 5) + 's';
+            document.body.appendChild(rosa);
+        }
+
+        // Função para o botão NÃO fugir (o clássico desafio)
+        function fugir() {
+            const btn = document.getElementById('btnNao');
+            // Calcula novas posições aleatórias na tela
+            const newX = Math.random() * (window.innerWidth - btn.offsetWidth - 20) + 10;
+            const newY = Math.random() * (window.innerHeight - btn.offsetHeight - 20) + 10;
+            btn.style.position = 'fixed';
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+        }
+
+        // Função para criar a Explosão de Amor
+        function criarExplosao() {
+            const emojisExplosao = ['❤️', '💖', '🌹', '✨', '💘', '🌷', '💓'];
+            // Cria 60 itens para a explosão
+            for (let i = 0; i < 60; i++) {
+                const item = document.createElement('div');
+                item.className = 'explosao-item';
+                item.innerText = emojisExplosao[Math.floor(Math.random() * emojisExplosao.length)];
+                
+                // Define a posição inicial no centro (perto do botão)
+                item.style.left = (window.innerWidth / 2) + 'px';
+                item.style.top = (window.innerHeight / 2) + 'px';
+
+                // Define as variáveis da animação para onde o item vai pular
+                // --x e --y definem a direção e a força do pulo
+                const forçaPositivaNegativaX = Math.random() < 0.5 ? -1 : 1;
+                const forçaPositivaNegativaY = Math.random() < 0.5 ? -1 : 1;
+                item.style.setProperty('--x', (Math.random() * 500 * forçaPositivaNegativaX) + 'px');
+                item.style.setProperty('--y', (Math.random() * 500 * forçaPositivaNegativaY) + 'px');
+                item.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg'); // Rotação aleatória
+
+                // Tamanho aleatório para cada item
+                item.style.fontSize = (Math.random() * 30 + 30) + 'px';
+
+                document.body.appendChild(item);
+                
+                // Remove o item da tela depois que a animação acaba
+                setTimeout(() => item.remove(), 2500);
+            }
+        }
+
+        // Função quando clicar em SIM
+        function confirmar() {
+            // Primeiro, cria a explosão na tela
+            criarExplosao();
+
+            // Depois de 1 segundo, mostra o alerta (para não atrapalhar a explosão)
+            setTimeout(() => {
+                alert("Ótima escolha, Gabriel! Sexta-feira está combinada! 😉🍷");
+                // Se quiser que ele te mande um zap na hora, use a linha abaixo:
+                // window.location.href = "https://wa.me/SEUNUMERO?text=Oi!+Eu+aceito+sair+na+sexta!";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
